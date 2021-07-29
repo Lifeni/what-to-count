@@ -1,12 +1,22 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [
+      "vite/client"
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react"
   },
-  "include": ["../renderer/**/*", "../common/**/*"],
-  "exclude": ["../main/**/*"]
+  "include": [
+    "../renderer/**/*"
+  ],
+  "exclude": [
+    "../main/**/*"
+  ]
 }

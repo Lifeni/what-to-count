@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
 const rendererPath = resolve(__dirname, './src/renderer')
 const outDirRenderer = resolve(__dirname, './app/renderer')
@@ -19,10 +19,6 @@ export default defineConfig({
       {
         find: '@renderer',
         replacement: resolve(__dirname, 'src/renderer'),
-      },
-      {
-        find: '@common',
-        replacement: resolve(__dirname, 'src/common'),
       },
     ],
   },
