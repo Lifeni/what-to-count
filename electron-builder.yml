@@ -1,6 +1,6 @@
-appId: com.jctaoo.electron_starter
-productName: electron starter
-copyright: Copyright © 2021 jctaoo
+appId: app.lifeni.count
+productName: 计数与统计
+copyright: Copyright © 2021 Lifeni
 directories:
   output: dist
   buildResources: build

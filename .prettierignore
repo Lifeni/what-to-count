@@ -1,6 +1,9 @@
 .cache
-content
+.git
+.github
+package.json
+package-lock.json
+yarn.lock
 public
+dist
 node_modules
-static
-scripts

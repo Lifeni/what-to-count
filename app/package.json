@@ -1,9 +1,9 @@
 {
-  "name": "vite-project",
+  "name": "what-to-count",
   "version": "0.1.0",
   "license": "MIT",
   "main": "index.js",
   "devDependencies": {
-    "electron": "^11.3.0"
+    "electron": "^13.1.7"
   }
 }
