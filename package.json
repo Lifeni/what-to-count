@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development elecrun --vite",
+    "dev": "cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
     "preview": "yarn build && cross-env NODE_ENV=production electron ./app/",
     "build": "elecrun build && vite build",
     "clean": "elecrun clean",

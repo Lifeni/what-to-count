@@ -1,7 +1,7 @@
-import { ViewContext } from '@renderer/App'
-import React, { useContext } from 'react'
+import { ipcRenderer } from 'electron'
+import React from 'react'
 import {
-  FiArrowLeft,
+  FiClock,
   FiDownload,
   FiPrinter,
   FiRotateCcw,
@@ -11,13 +11,11 @@ import {
 import Button from './Button'
 
 const Bar = () => {
-  const setView = useContext(ViewContext)
-
   return (
     <div className="flex justify-between gap-4">
       <section className="flex gap-4">
-        <Button onClick={() => setView && setView('start')}>
-          <FiArrowLeft /> 返回最近记录
+        <Button onClick={() => window.electron.view('home')}>
+          <FiClock /> 打开最近记录
         </Button>
         <Button>
           <FiRotateCcw /> 撤销

@@ -1,33 +1,73 @@
-import { app, BrowserWindow } from 'electron'
+import { fail } from 'assert/strict'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 1080,
-    height: 720,
+let homeWin: BrowserWindow | null = null
+let countWin: BrowserWindow | null = null
+
+const createHomeWindow = () => {
+  homeWin = new BrowserWindow({
+    width: 400,
+    height: 600,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      preload: join(__dirname, './preload.js'),
     },
     show: false,
     autoHideMenuBar: true,
-  }).once('ready-to-show', () => {
-    win.show()
+    resizable: false,
   })
+    .once('ready-to-show', () => {
+      homeWin?.show()
+    })
+    .on('closed', () => {
+      homeWin = null
+    })
+
   if (isDevelopment) {
-    win.loadURL('http://localhost:3000')
-    win.webContents.toggleDevTools()
+    homeWin.loadURL('http://localhost:3000/#home')
+    homeWin.webContents.toggleDevTools()
   } else {
-    win.loadURL(
+    homeWin.loadURL(
       pathToFileURL(join(__dirname, './renderer/index.html')).toString()
     )
   }
 }
 
-app.whenReady().then(createWindow)
+const createCountWindow = () => {
+  countWin = new BrowserWindow({
+    width: 1080,
+    height: 720,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: join(__dirname, './preload.js'),
+    },
+    show: false,
+    autoHideMenuBar: true,
+  })
+    .once('ready-to-show', () => {
+      countWin?.show()
+    })
+    .on('closed', () => {
+      countWin = null
+    })
+
+  if (isDevelopment) {
+    countWin.loadURL('http://localhost:3000/#count')
+    countWin.webContents.toggleDevTools()
+  } else {
+    countWin.loadURL(
+      pathToFileURL(join(__dirname, './renderer/index.html')).toString()
+    )
+  }
+}
+
+app.whenReady().then(createHomeWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -37,6 +77,21 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
+    createHomeWindow()
+  }
+})
+
+ipcMain.on('view', (e, name) => {
+  switch (name) {
+    case 'home': {
+      if (!homeWin) createHomeWindow()
+      else homeWin.focus()
+      break
+    }
+    case 'count': {
+      if (!countWin) createCountWindow()
+      else countWin.focus()
+      break
+    }
   }
 })
