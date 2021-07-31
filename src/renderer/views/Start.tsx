@@ -1,11 +1,11 @@
+import { ViewContext } from '@renderer/App'
+import Button from '@renderer/components/Button'
 import localforage from 'localforage'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
 
-interface Props {
-  setView: Dispatch<SetStateAction<ViewType>>
-}
-
-const Start = ({ setView }: Props) => {
+const Start = () => {
+  const setView = useContext(ViewContext)
   const [records, setRecords] = useState<string[]>([])
 
   useEffect(() => {
@@ -13,19 +13,19 @@ const Start = ({ setView }: Props) => {
   }, [])
 
   const handleNewRecord = () => {
-    setView('count')
+    if (setView) {
+      setView('count')
+    }
   }
 
   return (
     <main className="w-100 max-w-xl h-full mx-auto flex flex-col items-center justify-center gap-6">
       <section className="w-full col-span-1 flex gap-6 justify-between">
         <h1 className="text-2xl px-2">最近的记录</h1>
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md focus:ring-4"
-          onClick={handleNewRecord}
-        >
+        <Button color="blue-500" action={handleNewRecord}>
+          <FiPlus />
           新建记录
-        </button>
+        </Button>
       </section>
       <div className="w-full border h-80 p-6 rounded-md">
         {records.length === 0 ? (

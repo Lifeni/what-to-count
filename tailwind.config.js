@@ -12,6 +12,7 @@ module.exports = {
         'Segoe UI Emoji',
       ],
     },
+    extend: {},
   },
   variants: {
     extend: {},

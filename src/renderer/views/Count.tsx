@@ -6,11 +6,7 @@ import Statistics from '../components/Statistics'
 
 const InputContext = createContext([])
 
-interface Props {
-  setView: Dispatch<SetStateAction<ViewType>>
-}
-
-const Count = ({ setView }: Props) => {
+const Count = () => {
   return (
     <InputContext.Provider value={[]}>
       <main className="h-full flex flex-col gap-6">
