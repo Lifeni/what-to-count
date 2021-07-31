@@ -16,7 +16,7 @@ const Bar = () => {
   return (
     <div className="flex justify-between gap-4">
       <section className="flex gap-4">
-        <Button action={() => setView && setView('start')}>
+        <Button onClick={() => setView && setView('start')}>
           <FiArrowLeft /> 返回最近记录
         </Button>
         <Button>
@@ -27,13 +27,13 @@ const Bar = () => {
         </Button>
       </section>
       <section className="flex gap-4">
-        <Button color="red-500">
+        <Button className="bg-red-500 text-white">
           <FiTrash2 /> 移除所有记录
         </Button>
-        <Button color="green-600">
+        <Button className="bg-green-600 text-white">
           <FiPrinter /> 打印
         </Button>
-        <Button color="blue-500">
+        <Button className="bg-blue-500 text-white">
           <FiDownload /> 导出记录
         </Button>
       </section>

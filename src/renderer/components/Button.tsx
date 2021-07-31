@@ -1,20 +1,16 @@
-import React, { ReactNode } from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 
-interface Props {
-  color?: string
-  disabled?: boolean
-  action?: () => void
-  children: ReactNode | string
-}
-
-const Button = ({ color, disabled, action, children = '按钮' }: Props) => {
+const Button = ({
+  onClick,
+  className,
+  children = '按钮',
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className={`${color ? `bg-${color}` : 'bg-gray-100'} ${
-        color ? `text-white` : `text-black`
-      } px-4 py-2 rounded-md flex items-center gap-3 disabled:cursor-not-allowed disabled:opacity-70 focus:ring-4`}
-      onClick={action}
-      disabled={disabled}
+      className={`bg-gray-100 px-4 py-2 rounded-md flex items-center gap-3 focus:ring-4 ${className}`}
+      onClick={onClick}
+      {...props}
     >
       {children}
     </button>
