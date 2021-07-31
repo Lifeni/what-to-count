@@ -2,17 +2,20 @@ import React from 'react'
 
 const Statistics = () => {
   return (
-    <div className="flex-1">
-      <table className="table-auto w-full h-full">
+    <div
+      className="flex-1 rounded-md overflow-hidden border focus:ring-4"
+      tabIndex={0}
+    >
+      <table className="border-none w-full h-full">
         <thead>
-          <tr>
-            <th className="px-4 py-3 border">输入</th>
-            <th className="px-4 py-3 border">次数</th>
+          <tr className="divide-x">
+            <th className="px-4 py-3">输入</th>
+            <th className="px-4 py-3">次数</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td colSpan={2} className="px-4 py-3 border text-center">
+          <tr className="border-t divide-x">
+            <td colSpan={2} className="px-4 py-3 text-center">
               无数据
             </td>
           </tr>
