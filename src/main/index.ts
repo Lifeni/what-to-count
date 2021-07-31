@@ -29,7 +29,7 @@ const createHomeWindow = () => {
     })
 
   if (isDevelopment) {
-    homeWin.loadURL('http://localhost:3000/#home')
+    homeWin.loadURL('http://localhost:3000')
     homeWin.webContents.toggleDevTools()
   } else {
     homeWin.loadURL(
@@ -38,7 +38,7 @@ const createHomeWindow = () => {
   }
 }
 
-const createCountWindow = () => {
+const createCountWindow = (name: string) => {
   countWin = new BrowserWindow({
     width: 1080,
     height: 720,
@@ -58,7 +58,7 @@ const createCountWindow = () => {
     })
 
   if (isDevelopment) {
-    countWin.loadURL('http://localhost:3000/#count')
+    countWin.loadURL(`http://localhost:3000/#${name}`)
     countWin.webContents.toggleDevTools()
   } else {
     countWin.loadURL(
@@ -81,7 +81,7 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on('view', (e, name) => {
+ipcMain.on('view', (e, name, value) => {
   switch (name) {
     case 'home': {
       if (!homeWin) createHomeWindow()
@@ -89,8 +89,10 @@ ipcMain.on('view', (e, name) => {
       break
     }
     case 'count': {
-      if (!countWin) createCountWindow()
-      else countWin.focus()
+      if (!countWin) {
+        createCountWindow(value)
+        homeWin?.close()
+      } else countWin.focus()
       break
     }
   }

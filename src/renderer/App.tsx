@@ -8,12 +8,12 @@ const App = () => {
   useEffect(() => {
     const hash = window.location.hash
     switch (hash) {
-      case '#count': {
-        setView(<Count />)
+      case '': {
+        setView(<Home />)
         break
       }
-      case '#home': {
-        setView(<Home />)
+      default: {
+        setView(<Count />)
         break
       }
     }

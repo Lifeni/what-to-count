@@ -9,6 +9,7 @@ const Input = () => {
     if (e.key === 'Enter') {
       if (inputRef.current) {
         if (input !== '') {
+          setResult('...')
           console.log(input)
           setResult(input)
         }

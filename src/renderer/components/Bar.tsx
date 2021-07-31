@@ -14,7 +14,7 @@ const Bar = () => {
   return (
     <div className="flex justify-between gap-4">
       <section className="flex gap-4">
-        <Button onClick={() => window.electron.view('home')}>
+        <Button onClick={() => window.electron.setView('home')}>
           <FiClock /> 打开最近记录
         </Button>
         <Button>

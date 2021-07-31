@@ -11,13 +11,13 @@ const Home = () => {
   }, [])
 
   const handleNewRecord = () => {
-    window.electron.view('count')
+    const unixTime = new Date().getTime()
+    window.electron.setView('count', unixTime.toString())
   }
 
   return (
     <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-6">
       <section className="w-full col-span-1 flex gap-6 justify-between items-center">
-        <h1 className="text-2xl px-2">最近的记录</h1>
         <Button className="bg-blue-500 text-white" onClick={handleNewRecord}>
           <FiPlus />
           新建记录
