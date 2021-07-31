@@ -33,7 +33,7 @@ const Logs = () => {
         </table>
       ) : (
         <div className="flex h-full w-full items-center justify-center">
-          <p className="text-center text-gray-500">无数据</p>
+          <p className="text-center text-gray-500">无输入记录</p>
         </div>
       )}
     </div>

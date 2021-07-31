@@ -5,6 +5,11 @@ export type LogType = {
   name: string
 }
 
+export type StatType = {
+  name: string
+  count: number
+}
+
 declare global {
   interface Window {
     electron: {
