@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { KeyboardEvent, useRef, useState } from 'react'
 
 const Input = () => {
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const [input, setInput] = useState('')
+  const [result, setResult] = useState('')
+
+  const handleSubmit = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (inputRef.current) {
+        if (input !== '') {
+          console.log(input)
+          setResult(input)
+        }
+        inputRef.current.value = ''
+      }
+    }
+  }
+
   return (
     <input
-      className="w-full px-5 py-4 text-4xl bg-gray-100 outline-none focus:ring-4 focus:ring-red-400 focus:bg-transparent"
+      ref={inputRef}
+      className="w-full px-5 py-4 text-5xl border outline-none text-center caret-transparent focus:ring-4 focus:ring-blue-400"
       type="text"
       autoFocus
+      placeholder={result ? `[ ${result} ]` : '等待输入'}
+      onChange={e => setInput(e.target.value.trim())}
+      onKeyDown={handleSubmit}
     />
   )
 }
