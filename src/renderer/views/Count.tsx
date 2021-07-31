@@ -11,10 +11,12 @@ import { LogType } from '../index'
 import Input from '../components/Input'
 import Logs from '../components/Logs'
 import Statistics from '../components/Statistics'
+import localforage from 'localforage'
 
 export const InputContext = createContext<{
   logs: LogType[]
   setLogs: Dispatch<SetStateAction<LogType[]>>
+  hash: string
 } | null>(null)
 
 const Count = () => {
@@ -22,7 +24,16 @@ const Count = () => {
   const [logs, setLogs] = useState<LogType[]>([])
 
   useEffect(() => {
-    setHash(window.location.hash)
+    const hash = window.location.hash
+    if (hash) {
+      setHash(hash)
+      localforage
+        .getItem(hash.replace('#', ''))
+        .then(value => {
+          if (value) setLogs(value as LogType[])
+        })
+        .catch(err => console.error(err))
+    }
   }, [])
 
   return (
@@ -34,6 +45,7 @@ const Count = () => {
         value={{
           logs,
           setLogs,
+          hash,
         }}
       >
         <main className="h-full max-h-full flex flex-col gap-6">

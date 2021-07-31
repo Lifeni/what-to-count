@@ -1,6 +1,6 @@
 import { InputContext } from '@renderer/views/Count'
+import localforage from 'localforage'
 import React, { KeyboardEvent, useContext, useRef, useState } from 'react'
-import { LogType } from '../index'
 
 const Input = () => {
   const context = useContext(InputContext)
@@ -14,14 +14,17 @@ const Input = () => {
         if (input !== '') {
           setResult('...')
 
-          context.setLogs([
+          const arr = [
             {
               time: new Date().getTime().toString(),
               name: input,
             },
             ...context.logs,
-          ])
+          ]
 
+          context.setLogs(arr)
+          localforage.setItem(context.hash.replace('#', ''), arr)
+          setInput('')
           setResult(input)
         }
         inputRef.current.value = ''
