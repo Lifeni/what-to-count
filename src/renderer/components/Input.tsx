@@ -1,16 +1,27 @@
-import React, { KeyboardEvent, useRef, useState } from 'react'
+import { InputContext } from '@renderer/views/Count'
+import React, { KeyboardEvent, useContext, useRef, useState } from 'react'
+import { LogType } from '../index'
 
 const Input = () => {
+  const context = useContext(InputContext)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [input, setInput] = useState('')
   const [result, setResult] = useState('')
 
   const handleSubmit = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      if (inputRef.current) {
+      if (inputRef.current && context) {
         if (input !== '') {
           setResult('...')
-          console.log(input)
+
+          context.setLogs([
+            {
+              time: new Date().getTime().toString(),
+              name: input,
+            },
+            ...context.logs,
+          ])
+
           setResult(input)
         }
         inputRef.current.value = ''

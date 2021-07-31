@@ -19,7 +19,9 @@ const App = () => {
     }
   }, [])
 
-  return <div className="h-screen w-full font-sans p-6">{view}</div>
+  return (
+    <div className="h-screen w-full font-sans p-6 overflow-hidden">{view}</div>
+  )
 }
 
 export default App

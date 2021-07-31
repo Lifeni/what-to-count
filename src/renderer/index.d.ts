@@ -1,6 +1,9 @@
-export {}
-
 type ViewType = 'home' | 'count'
+
+export type LogType = {
+  time: string
+  name: string
+}
 
 declare global {
   interface Window {
