@@ -10,8 +10,8 @@ let countWin: BrowserWindow | null = null
 
 const createHomeWindow = () => {
   homeWin = new BrowserWindow({
-    width: 400,
-    height: 600,
+    width: 520,
+    height: 720,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

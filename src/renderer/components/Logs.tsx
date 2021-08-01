@@ -14,9 +14,9 @@ const Logs = () => {
         <table className="w-full border-none">
           <thead>
             <tr className="border-b divide-x">
-              <th className="px-4 py-2">序号</th>
-              <th className="px-4 py-2">输入</th>
-              <th className="px-4 py-2">录入时间</th>
+              <th className="px-4 py-3">#</th>
+              <th className="px-4 py-3">输入</th>
+              <th className="px-4 py-3">录入时间</th>
             </tr>
           </thead>
           <tbody>
@@ -25,7 +25,7 @@ const Logs = () => {
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
                 <td className="px-4 py-3 text-center font-bold">{log.name}</td>
                 <td className="px-4 py-3 text-center">
-                  {dayjs(Number(log.time)).format('YYYY 年 M 月 D 日 HH:mm:ss')}
+                  {dayjs(Number(log.time)).format('YYYY 年 MM 月 DD 日 HH:mm:ss')}
                 </td>
               </tr>
             ))}

@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
+        'Roboto',
         'Inter',
         'HarmonyOS Sans SC',
         'sans-serif',

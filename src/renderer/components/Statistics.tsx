@@ -36,8 +36,8 @@ const Statistics = () => {
         <table className="w-full border-none">
           <thead>
             <tr className="border-b divide-x">
-              <th className="px-4 py-2">输入</th>
-              <th className="px-4 py-2">次数</th>
+              <th className="px-4 py-3">输入</th>
+              <th className="px-4 py-3">次数</th>
             </tr>
           </thead>
           <tbody>

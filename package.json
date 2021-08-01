@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development elecrun --vite --preload preload.ts",
     "preview": "yarn build && cross-env NODE_ENV=production electron ./app/",
-    "build": "elecrun build && vite build",
+    "build": "elecrun build --preload preload.ts && vite build",
     "clean": "elecrun clean",
     "pack": "yarn run build && yarn run rebuild && electron-builder -c ./electron-builder.yml --win --linux",
     "pack:all": "yarn run build && yarn run rebuild && electron-builder -c ./electron-builder.yml --win --linux --mac",
