@@ -2,14 +2,23 @@ import Button from '@renderer/components/Button'
 import dayjs from 'dayjs'
 import localforage from 'localforage'
 import React, { useEffect, useState } from 'react'
-import { FiClock, FiDownload, FiPlus } from 'react-icons/fi'
+import {
+  FiClock,
+  FiDownload,
+  FiPlus,
+  FiRefreshCw,
+  FiTrash2,
+} from 'react-icons/fi'
 
 const Home = () => {
   const [records, setRecords] = useState<string[]>([])
 
   useEffect(() => {
-    localforage.keys().then(keys => setRecords(keys))
+    handleGetRecords()
   }, [])
+
+  const handleGetRecords = () =>
+    localforage.keys().then(keys => setRecords(keys))
 
   const handleNewRecord = () => {
     const unixTime = new Date().getTime()
@@ -19,17 +28,19 @@ const Home = () => {
   return (
     <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-6">
       <section className="w-full col-span-1 flex gap-4 justify-between items-center">
-        <h1 className="text-xl px-2 flex items-center gap-3">
-          <FiClock />
-          最近的记录
-        </h1>
         <section className="flex gap-4 items-center">
-          <Button className="bg-green-600 text-white" onClick={handleNewRecord}>
+          <h1 className="text-xl px-2 flex items-center gap-3">
+            <FiClock />
+            最近的记录
+          </h1>
+        </section>
+        <section className="flex gap-4 items-center">
+          <Button onClick={handleGetRecords}>
+            <FiRefreshCw /> 刷新
+          </Button>
+          <Button className="bg-blue-500 text-white" onClick={handleNewRecord}>
             <FiPlus />
             新建记录
-          </Button>
-          <Button className="bg-blue-500 text-white">
-            <FiDownload /> 导出
           </Button>
         </section>
       </section>
@@ -66,8 +77,13 @@ const Home = () => {
                         )}
                         &nbsp;创建的
                       </td>
-                      <td className="cursor-pointer px-4 py-3 text-center text-red-600 hover:bg-gray-100">
-                        <button>删除</button>
+                      <td className="grid grid-cols-2 divide-x">
+                        <button className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-100">
+                          <FiDownload /> 导出
+                        </button>
+                        <button className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100">
+                          <FiTrash2 /> 删除
+                        </button>
                       </td>
                     </tr>
                   ))}

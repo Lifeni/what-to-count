@@ -10,8 +10,8 @@ let countWin: BrowserWindow | null = null
 
 const createHomeWindow = () => {
   homeWin = new BrowserWindow({
-    width: 520,
-    height: 720,
+    width: 720,
+    height: 540,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -91,7 +91,6 @@ ipcMain.on('view', (e, name, value) => {
     case 'count': {
       if (!countWin) {
         createCountWindow(value)
-        homeWin?.close()
       } else countWin.focus()
       break
     }
