@@ -1,5 +1,5 @@
 import { fail } from 'assert/strict'
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain } from 'electron'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
 
@@ -42,6 +42,8 @@ const createCountWindow = (name: string) => {
   countWin = new BrowserWindow({
     width: 1080,
     height: 720,
+    minWidth: 900,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -95,4 +97,13 @@ ipcMain.on('view', (e, name, value) => {
       break
     }
   }
+})
+
+ipcMain.on('export', (e, name) => {
+  const file = dialog.showSaveDialogSync({
+    title: '导出记录为 CSV 文件',
+    defaultPath: `${name || '导出的记录文件'}.csv`,
+    filters: [{ name: 'CSV', extensions: ['csv'] }],
+  })
+  e.reply('export-reply', file)
 })

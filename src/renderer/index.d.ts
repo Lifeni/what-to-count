@@ -14,6 +14,7 @@ declare global {
   interface Window {
     electron: {
       setView: (name: ViewType, value?: string) => void
+      exportRecord: (data: string, name: string) => void
     }
   }
 }
