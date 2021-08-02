@@ -11,3 +11,15 @@ export const clearLogs = (
     setLogs([])
   })
 }
+
+export const revertLog = async (
+  id: string,
+  logs: LogType[],
+  setLogs: Dispatch<SetStateAction<LogType[]>>
+) => {
+  window.electron.showConfirm('确认撤销上一次输入记录吗？', async () => {
+    const arr = logs.slice(1)
+    await localforage.setItem(id, arr)
+    setLogs(arr)
+  })
+}

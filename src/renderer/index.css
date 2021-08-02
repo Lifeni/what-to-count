@@ -13,3 +13,7 @@
   font-weight: 700;
   src: url(assets/Roboto-Bold.ttf) format('truetype');
 }
+
+input::placeholder {
+  color: #9ca3af;
+}

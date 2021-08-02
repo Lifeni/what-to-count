@@ -49,12 +49,13 @@ const Input = () => {
   return (
     <input
       ref={inputRef}
-      className="w-full px-5 py-4 text-6xl border outline-none rounded-md text-center caret-transparent placeholder-opacity-25 focus:ring-4"
+      className="w-full px-5 py-4 text-6xl border outline-none rounded-md text-center focus:ring-4"
       type="text"
       autoFocus
       placeholder={result ? `[ ${result} ]` : '等待输入'}
       onChange={e => setInput(e.target.value.trim())}
       onKeyDown={handleSubmit}
+      style={{ caretColor: 'transparent' }}
     />
   )
 }

@@ -1,4 +1,4 @@
-import { clearLogs } from '@renderer/utils/log-handler'
+import { clearLogs, revertLog } from '@renderer/utils/log-handler'
 import { exportRecord } from '@renderer/utils/record-handler'
 import { InputContext } from '@renderer/views/Count'
 import dayjs from 'dayjs'
@@ -31,7 +31,13 @@ const Bar = () => {
         &nbsp;创建的
       </h1>
 
-      <Button className="hover:bg-green-600 hover:text-white">
+      <Button
+        className="hover:bg-green-600 hover:text-white"
+        onClick={() =>
+          context && revertLog(hash, context.logs, context.setLogs)
+        }
+        disabled={context?.logs.length === 0}
+      >
         <FiRotateCcw /> 撤销上次输入
       </Button>
       <Button
