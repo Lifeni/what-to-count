@@ -32,14 +32,14 @@ const Statistics = () => {
       {context && context.logs.length !== 0 ? (
         <table className="w-full border-none">
           <thead>
-            <tr className="border-b divide-x">
+            <tr className="border-b divide-x bg-gray-50">
               <th className="px-4 py-3">输入</th>
               <th className="px-4 py-3">次数</th>
             </tr>
           </thead>
           <tbody>
             {stats.map(stat => (
-              <tr className="border-b divide-x" key={stat.name}>
+              <tr className="border-b divide-x even:bg-gray-50" key={stat.name}>
                 <td className="px-4 py-3 text-center font-bold">{stat.name}</td>
                 <td className="px-4 py-3 text-center">{stat.count}</td>
               </tr>

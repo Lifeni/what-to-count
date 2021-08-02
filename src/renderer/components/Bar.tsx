@@ -22,7 +22,7 @@ const Bar = () => {
       <Button onClick={() => window.electron.setView('home')}>
         <FiClock /> 打开最近记录
       </Button>
-      <h1 className="px-4 text-gray-400 flex gap-3 items-center justify-center flex-1 border rounded-md">
+      <h1 className="px-4 text-gray-400 flex gap-3 items-center justify-center flex-1 border rounded-md hover:text-gray-600 transition cursor-default">
         <FiFile />
         在&nbsp;
         {dayjs(Number(hash.replace('#', ''))).format(
@@ -31,17 +31,17 @@ const Bar = () => {
         &nbsp;创建的
       </h1>
 
-      <Button className="hover:bg-green-500 hover:text-white">
+      <Button className="hover:bg-green-600 hover:text-white">
         <FiRotateCcw /> 撤销上次输入
       </Button>
       <Button
-        className="hover:bg-red-500 hover:text-white"
+        className="hover:bg-red-600 hover:text-white"
         onClick={() => context && clearLogs(hash, context.setLogs)}
       >
         <FiTrash2 /> 清空
       </Button>
       <Button
-        className="hover:bg-blue-500 hover:text-white"
+        className="hover:bg-blue-600 hover:text-white"
         onClick={() => exportRecord(hash)}
       >
         <FiDownload /> 导出

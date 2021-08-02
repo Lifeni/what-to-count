@@ -36,7 +36,7 @@ const Home = () => {
             <FiRefreshCw /> 刷新
           </Button>
           <Button
-            className="hover:text-white hover:bg-blue-500"
+            className="hover:text-white hover:bg-blue-600"
             onClick={() => createRecord()}
           >
             <FiPlus />
@@ -68,7 +68,7 @@ const Home = () => {
                         {records.length - index}
                       </td>
                       <td
-                        className="cursor-pointer px-4 py-3 text-center hover:bg-gray-100"
+                        className="cursor-pointer px-4 py-3 text-center hover:bg-gray-50"
                         onClick={() => window.electron.setView('count', record)}
                       >
                         在&nbsp;
@@ -80,13 +80,13 @@ const Home = () => {
                       <td className="grid grid-cols-2 divide-x">
                         <button
                           onClick={() => exportRecord(record)}
-                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-100"
+                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-50"
                         >
                           <FiDownload /> 导出
                         </button>
                         <button
                           onClick={() => removeRecord(record, setRecords)}
-                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100"
+                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-50"
                         >
                           <FiTrash2 /> 删除
                         </button>

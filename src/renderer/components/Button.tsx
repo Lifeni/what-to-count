@@ -8,7 +8,7 @@ const Button = ({
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className={`bg-gray-100 px-4 py-2 border rounded-md flex items-center select-none gap-3 hover:bg-gray-200 focus:ring-4 ${className} transition`}
+      className={`bg-gray-50 px-4 py-2 border rounded-md flex items-center select-none gap-3 hover:bg-gray-100 focus:ring-4 ${className} transition`}
       onClick={onClick}
       {...props}
     >

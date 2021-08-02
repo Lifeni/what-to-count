@@ -10,7 +10,7 @@ const Logs = () => {
       {context && context.logs.length !== 0 ? (
         <table className="w-full border-none">
           <thead>
-            <tr className="border-b divide-x">
+            <tr className="border-b divide-x bg-gray-50">
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">输入</th>
               <th className="px-4 py-3">录入时间</th>
@@ -18,7 +18,7 @@ const Logs = () => {
           </thead>
           <tbody>
             {context.logs.map((log, index, logs) => (
-              <tr className="border-b divide-x" key={log.time}>
+              <tr className="border-b divide-x even:bg-gray-50" key={log.time}>
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
                 <td className="px-4 py-3 text-center font-bold">{log.name}</td>
                 <td className="px-4 py-3 text-center">

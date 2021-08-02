@@ -5,8 +5,9 @@ import { LogType } from '..'
 import { JSONToCSV } from './export-csv'
 
 export const createRecord = async () => {
-  const unixTime = new Date().getTime()
-  window.electron.setView('count', unixTime.toString())
+  const unixTime = new Date().getTime().toString()
+  await localforage.setItem(unixTime, [])
+  window.electron.setView('count', unixTime)
 }
 
 export const getRecords = async (
