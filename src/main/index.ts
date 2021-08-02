@@ -41,7 +41,7 @@ const createCountWindow = (name: string) => {
   countWin = new BrowserWindow({
     width: 1080,
     height: 720,
-    minWidth: 900,
+    minWidth: 980,
     minHeight: 600,
     webPreferences: {
       nodeIntegration: false,
@@ -62,9 +62,7 @@ const createCountWindow = (name: string) => {
     countWin.loadURL(`http://localhost:3000/#${name}`)
     countWin.webContents.toggleDevTools()
   } else {
-    countWin.loadURL(
-      pathToFileURL(join(__dirname, './renderer/index.html')).toString()
-    )
+    countWin.loadFile(`./renderer/index.html`, { hash: name })
   }
 }
 
