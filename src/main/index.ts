@@ -1,4 +1,3 @@
-import { fail } from 'assert/strict'
 import { app, BrowserWindow, dialog, ipcMain } from 'electron'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
@@ -86,13 +85,16 @@ app.on('activate', () => {
 ipcMain.on('view', (e, name, value) => {
   switch (name) {
     case 'home': {
-      if (!homeWin) createHomeWindow()
-      else homeWin.focus()
+      if (!homeWin) {
+        createHomeWindow()
+        countWin && countWin.close()
+      } else homeWin.focus()
       break
     }
     case 'count': {
       if (!countWin) {
         createCountWindow(value)
+        homeWin && homeWin.close()
       } else countWin.focus()
       break
     }
@@ -106,4 +108,15 @@ ipcMain.on('export', (e, name) => {
     filters: [{ name: 'CSV', extensions: ['csv'] }],
   })
   e.reply('export-reply', file)
+})
+
+ipcMain.on('confirm', (e, message) => {
+  const id = dialog.showMessageBoxSync({
+    message,
+    title: '确认一下',
+    type: 'warning',
+    buttons: ['取消', '确定'],
+  })
+
+  e.reply('confirm-reply', id !== 0)
 })

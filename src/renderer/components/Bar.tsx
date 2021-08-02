@@ -1,7 +1,4 @@
-import { JSONToCSV } from '@renderer/utils/json-to-csv'
-import dayjs from 'dayjs'
-import { ipcRenderer } from 'electron'
-import localforage from 'localforage'
+import { exportRecord } from '@renderer/utils/record-handler'
 import React from 'react'
 import {
   FiClock,
@@ -11,21 +8,9 @@ import {
   FiRotateCw,
   FiTrash2,
 } from 'react-icons/fi'
-import { LogType } from '..'
 import Button from './Button'
 
 const Bar = () => {
-  const handleExportRecord = async () => {
-    const id = window.location.hash.replace('#', '')
-    const data = await localforage.getItem<LogType[]>(id)
-    if (data) {
-      window.electron.exportRecord(
-        JSONToCSV(data),
-        `在 ${dayjs(Number(id)).format('YYYY-MM-DD HH-mm-ss')} 创建的记录`
-      )
-    }
-  }
-
   return (
     <div className="flex justify-between gap-4">
       <section className="flex gap-4">
@@ -40,17 +25,16 @@ const Bar = () => {
         </Button>
       </section>
       <section className="flex gap-4">
-        <Button className="bg-red-500 text-white">
-          <FiTrash2 /> 清空记录
+        <Button>
+          <FiTrash2 /> 清空
         </Button>
-        <Button className="bg-green-600 text-white">
+        <Button>
           <FiPrinter /> 打印
         </Button>
         <Button
-          className="bg-blue-500 text-white"
-          onClick={() => handleExportRecord()}
+          onClick={() => exportRecord(window.location.hash.replace('#', ''))}
         >
-          <FiDownload /> 导出记录
+          <FiDownload /> 导出
         </Button>
       </section>
     </div>

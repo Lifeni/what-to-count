@@ -15,6 +15,7 @@ declare global {
     electron: {
       setView: (name: ViewType, value?: string) => void
       exportRecord: (data: string, name: string) => void
+      showConfirm: (message: string, action: () => void) => void
     }
   }
 }

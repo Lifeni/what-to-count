@@ -1,7 +1,11 @@
 import Button from '@renderer/components/Button'
-import { JSONToCSV } from '@renderer/utils/json-to-csv'
+import {
+  createRecord,
+  exportRecord,
+  getRecords,
+  removeRecord,
+} from '@renderer/utils/record-handler'
 import dayjs from 'dayjs'
-import localforage from 'localforage'
 import React, { useEffect, useState } from 'react'
 import {
   FiClock,
@@ -10,32 +14,13 @@ import {
   FiRefreshCw,
   FiTrash2,
 } from 'react-icons/fi'
-import { LogType } from '..'
 
 const Home = () => {
   const [records, setRecords] = useState<string[]>([])
 
   useEffect(() => {
-    handleGetRecords()
+    getRecords(setRecords)
   }, [])
-
-  const handleGetRecords = () =>
-    localforage.keys().then(keys => setRecords(keys))
-
-  const handleNewRecord = () => {
-    const unixTime = new Date().getTime()
-    window.electron.setView('count', unixTime.toString())
-  }
-
-  const handleExportRecord = async (id: string) => {
-    const data = await localforage.getItem<LogType[]>(id)
-    if (data) {
-      window.electron.exportRecord(
-        JSONToCSV(data),
-        `在 ${dayjs(Number(id)).format('YYYY-MM-DD HH-mm-ss')} 创建的记录`
-      )
-    }
-  }
 
   return (
     <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-6">
@@ -47,10 +32,13 @@ const Home = () => {
           </h1>
         </section>
         <section className="flex gap-4 items-center">
-          <Button onClick={handleGetRecords}>
+          <Button onClick={() => getRecords(setRecords)}>
             <FiRefreshCw /> 刷新
           </Button>
-          <Button className="bg-blue-500 text-white" onClick={handleNewRecord}>
+          <Button
+            className="bg-blue-500 text-white"
+            onClick={() => createRecord()}
+          >
             <FiPlus />
             新建记录
           </Button>
@@ -91,12 +79,15 @@ const Home = () => {
                       </td>
                       <td className="grid grid-cols-2 divide-x">
                         <button
-                          onClick={() => handleExportRecord(record)}
+                          onClick={() => exportRecord(record)}
                           className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-100"
                         >
                           <FiDownload /> 导出
                         </button>
-                        <button className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100">
+                        <button
+                          onClick={() => removeRecord(record, setRecords)}
+                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100"
+                        >
                           <FiTrash2 /> 删除
                         </button>
                       </td>

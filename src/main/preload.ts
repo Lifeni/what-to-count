@@ -13,4 +13,10 @@ contextBridge.exposeInMainWorld('electron', {
       }
     })
   },
+  showConfirm: (message: string, action: () => void) => {
+    ipcRenderer.send('confirm', message)
+    ipcRenderer.once('confirm-reply', (e, result) => {
+      if (result) action()
+    })
+  },
 })
