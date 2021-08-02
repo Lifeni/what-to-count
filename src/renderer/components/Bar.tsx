@@ -31,13 +31,19 @@ const Bar = () => {
         &nbsp;创建的
       </h1>
 
-      <Button>
+      <Button className="hover:bg-green-500 hover:text-white">
         <FiRotateCcw /> 撤销上次输入
       </Button>
-      <Button onClick={() => context && clearLogs(hash, context.setLogs)}>
+      <Button
+        className="hover:bg-red-500 hover:text-white"
+        onClick={() => context && clearLogs(hash, context.setLogs)}
+      >
         <FiTrash2 /> 清空
       </Button>
-      <Button onClick={() => exportRecord(hash)}>
+      <Button
+        className="hover:bg-blue-500 hover:text-white"
+        onClick={() => exportRecord(hash)}
+      >
         <FiDownload /> 导出
       </Button>
     </div>

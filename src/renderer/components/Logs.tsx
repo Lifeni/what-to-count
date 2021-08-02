@@ -6,10 +6,7 @@ const Logs = () => {
   const context = useContext(InputContext)
 
   return (
-    <div
-      className="w-full h-full min-h-0 rounded-md overflow-y-auto border focus:ring-4"
-      tabIndex={0}
-    >
+    <div className="w-full h-full min-h-0 rounded-md overflow-y-auto border">
       {context && context.logs.length !== 0 ? (
         <table className="w-full border-none">
           <thead>
@@ -25,7 +22,9 @@ const Logs = () => {
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
                 <td className="px-4 py-3 text-center font-bold">{log.name}</td>
                 <td className="px-4 py-3 text-center">
-                  {dayjs(Number(log.time)).format('YYYY 年 MM 月 DD 日 HH:mm:ss')}
+                  {dayjs(Number(log.time)).format(
+                    'YYYY 年 MM 月 DD 日 HH:mm:ss'
+                  )}
                 </td>
               </tr>
             ))}

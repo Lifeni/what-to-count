@@ -48,10 +48,10 @@ const Count = () => {
           hash,
         }}
       >
-        <main className="h-full max-h-full flex flex-col gap-6">
+        <main className="h-full max-h-full flex flex-col gap-4">
           <Bar />
-          <div className="flex-1 grid grid-cols-5 gap-6 min-h-0">
-            <section className="flex flex-col col-span-2 gap-6 h-full min-h-0">
+          <div className="flex-1 grid grid-cols-5 gap-4 min-h-0">
+            <section className="flex flex-col col-span-2 gap-4 h-full min-h-0">
               <Input />
               <Statistics />
             </section>

@@ -23,7 +23,7 @@ const Home = () => {
   }, [])
 
   return (
-    <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-6">
+    <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-4">
       <section className="w-full col-span-1 flex gap-4 justify-between items-center">
         <section className="flex gap-4 items-center">
           <h1 className="text-xl px-2 flex items-center gap-3">
@@ -36,7 +36,7 @@ const Home = () => {
             <FiRefreshCw /> 刷新
           </Button>
           <Button
-            className="bg-blue-500 text-white"
+            className="hover:text-white hover:bg-blue-500"
             onClick={() => createRecord()}
           >
             <FiPlus />

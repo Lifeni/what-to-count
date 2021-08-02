@@ -28,10 +28,7 @@ const Statistics = () => {
   }, [context])
 
   return (
-    <div
-      className="w-full h-full min-h-0 rounded-md overflow-y-auto border focus:ring-4"
-      tabIndex={0}
-    >
+    <div className="w-full h-full min-h-0 rounded-md overflow-y-auto border">
       {context && context.logs.length !== 0 ? (
         <table className="w-full border-none">
           <thead>
