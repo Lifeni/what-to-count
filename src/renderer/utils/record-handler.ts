@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import localforage from 'localforage'
+import { Dispatch, SetStateAction } from 'react'
 import { LogType } from '..'
 import { JSONToCSV } from './export-csv'
 
@@ -9,7 +10,7 @@ export const createRecord = async () => {
 }
 
 export const getRecords = async (
-  setRecords: React.Dispatch<React.SetStateAction<string[]>>
+  setRecords: Dispatch<SetStateAction<string[]>>
 ) => {
   const keys = await localforage.keys()
   setRecords(keys)
@@ -27,7 +28,7 @@ export const exportRecord = async (id: string) => {
 
 export const removeRecord = async (
   id: string,
-  setRecords: React.Dispatch<React.SetStateAction<string[]>>
+  setRecords: Dispatch<SetStateAction<string[]>>
 ) => {
   window.electron.showConfirm('确认删除这条记录吗？', async () => {
     await localforage.removeItem(id)

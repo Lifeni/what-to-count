@@ -1,12 +1,26 @@
 import { InputContext } from '@renderer/views/Count'
 import localforage from 'localforage'
-import React, { KeyboardEvent, useContext, useRef, useState } from 'react'
+import React, {
+  KeyboardEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 const Input = () => {
   const context = useContext(InputContext)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [input, setInput] = useState('')
   const [result, setResult] = useState('')
+
+  useEffect(() => {
+    if (context?.logs.length === 0) {
+      setInput('')
+      setResult('')
+      inputRef.current && (inputRef.current.value = '')
+    }
+  }, [context?.logs])
 
   const handleSubmit = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {

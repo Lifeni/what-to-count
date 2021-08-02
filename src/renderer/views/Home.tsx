@@ -47,7 +47,7 @@ const Home = () => {
       <div className="w-full min-h-0 border h-full rounded-md">
         {records.length === 0 ? (
           <div className="w-full h-full flex items-center justify-center">
-            <p className="text-md text-gray-500">没有记录</p>
+            <p className="text-md text-gray-400">没有记录</p>
           </div>
         ) : (
           <div className="h-full min-h-0 overflow-auto">

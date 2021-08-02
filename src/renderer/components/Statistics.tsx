@@ -51,7 +51,7 @@ const Statistics = () => {
         </table>
       ) : (
         <div className="flex h-full w-full items-center justify-center">
-          <p className="text-center text-gray-500">无统计数据</p>
+          <p className="text-center text-gray-400">无统计数据</p>
         </div>
       )}
     </div>
