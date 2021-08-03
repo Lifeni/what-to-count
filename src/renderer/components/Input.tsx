@@ -52,8 +52,8 @@ const Input = () => {
   return (
     <input
       ref={inputRef}
-      className="w-full px-5 py-4 text-6xl border outline-none rounded-md text-center focus:ring-4"
-      type="text"
+      className="w-full px-5 py-4 text-6xl border outline-none rounded-md text-center focus:ring-4 appearance-none"
+      type="number"
       autoFocus
       placeholder={result ? `[ ${result} ]` : '等待输入'}
       onChange={e => setInput(e.target.value.trim())}

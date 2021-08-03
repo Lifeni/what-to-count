@@ -7,7 +7,6 @@ import {
   FiClock,
   FiDownload,
   FiFile,
-  FiPrinter,
   FiRotateCcw,
   FiTrash2,
 } from 'react-icons/fi'
@@ -50,7 +49,7 @@ const Bar = () => {
         className="hover:bg-blue-600 hover:text-white"
         onClick={() => exportRecord(hash)}
       >
-        <FiDownload /> 导出
+        <FiDownload /> 导出记录
       </Button>
     </div>
   )

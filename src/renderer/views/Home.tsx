@@ -8,6 +8,7 @@ import {
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import {
+  FiBookOpen,
   FiClock,
   FiDownload,
   FiPlus,
@@ -36,6 +37,13 @@ const Home = () => {
             <FiRefreshCw /> 刷新
           </Button>
           <Button
+            className="hover:text-white hover:bg-green-600"
+            onClick={() => createRecord()}
+          >
+            <FiBookOpen />
+            映射
+          </Button>
+          <Button
             className="hover:text-white hover:bg-blue-600"
             onClick={() => createRecord()}
           >
@@ -53,7 +61,7 @@ const Home = () => {
           <div className="h-full min-h-0 overflow-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b divide-x">
+                <tr className="border-b divide-x bg-gray-50">
                   <th className="px-4 py-3">#</th>
                   <th className="px-4 py-3">名称</th>
                   <th className="px-4 py-3">操作</th>
@@ -63,12 +71,15 @@ const Home = () => {
                 {records
                   .sort((a, b) => Number(b) - Number(a))
                   .map((record, index) => (
-                    <tr key={record} className="px-6 py-4 border-b divide-x">
+                    <tr
+                      key={record}
+                      className="px-6 py-4 border-b divide-x even:bg-gray-50"
+                    >
                       <td className="px-4 py-3 text-center">
                         {records.length - index}
                       </td>
                       <td
-                        className="cursor-pointer px-4 py-3 text-center hover:bg-gray-50"
+                        className="cursor-pointer px-4 py-3 text-center hover:bg-gray-100"
                         onClick={() => window.electron.setView('count', record)}
                       >
                         在&nbsp;
@@ -80,13 +91,13 @@ const Home = () => {
                       <td className="grid grid-cols-2 divide-x">
                         <button
                           onClick={() => exportRecord(record)}
-                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-50"
+                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-blue-600 hover:bg-gray-100"
                         >
                           <FiDownload /> 导出
                         </button>
                         <button
                           onClick={() => removeRecord(record, setRecords)}
-                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-50"
+                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100"
                         >
                           <FiTrash2 /> 删除
                         </button>

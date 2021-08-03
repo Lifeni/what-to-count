@@ -2,7 +2,8 @@ import dayjs from 'dayjs'
 import localforage from 'localforage'
 import { Dispatch, SetStateAction } from 'react'
 import { LogType } from '..'
-import { JSONToCSV } from './export-csv'
+import { calcStatistics } from './calc-statistics'
+import { logsToCSV, statsToCSV } from './export-csv'
 
 export const createRecord = async () => {
   const unixTime = new Date().getTime().toString()
@@ -23,7 +24,8 @@ export const exportRecord = async (id: string) => {
   const data = await localforage.getItem<LogType[]>(id)
   if (data) {
     window.electron.exportRecord(
-      JSONToCSV(data),
+      logsToCSV(data),
+      statsToCSV(calcStatistics(data, 'id')),
       `在 ${dayjs(Number(id)).format('YYYY-MM-DD HH-mm-ss')} 创建的记录`
     )
     window.log.debug(`记录 [${id}] 导出记录文件`)

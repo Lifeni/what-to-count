@@ -1,3 +1,4 @@
+import { calcStatistics } from '@renderer/utils/calc-statistics'
 import { InputContext } from '@renderer/views/Count'
 import React, { useContext, useEffect, useState } from 'react'
 import { StatType } from '../index'
@@ -7,24 +8,9 @@ const Statistics = () => {
   const [stats, setStats] = useState<StatType[]>([])
 
   useEffect(() => {
-    const map = new Map<string, number>()
-    if (context && context.logs) {
-      context.logs.map(log => {
-        const count = map.get(log.name)
-        if (count !== undefined) {
-          map.set(log.name, count + 1)
-        } else {
-          map.set(log.name, 1)
-        }
-      })
+    if (context) {
+      setStats(calcStatistics(context.logs, 'count'))
     }
-
-    setStats(
-      Array.from(map.entries(), ([key, value]) => ({
-        name: key,
-        count: value,
-      })).sort((a, b) => b.count - a.count)
-    )
   }, [context])
 
   return (

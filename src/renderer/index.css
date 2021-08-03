@@ -14,6 +14,14 @@
   src: url(assets/Roboto-Bold.ttf) format('truetype');
 }
 
-input::placeholder {
+input[type='number']::placeholder {
   color: #9ca3af;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }

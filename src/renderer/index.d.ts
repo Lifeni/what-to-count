@@ -16,7 +16,7 @@ declare global {
   interface Window {
     electron: {
       setView: (name: ViewType, value?: string) => void
-      exportRecord: (data: string, name: string) => void
+      exportRecord: (logs: string, stats: string, name: string) => void
       showConfirm: (message: string, action: () => void) => void
     }
     log: log.LogFunctions

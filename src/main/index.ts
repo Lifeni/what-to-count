@@ -41,8 +41,8 @@ const createCountWindow = (name: string) => {
   countWin = new BrowserWindow({
     width: 1080,
     height: 720,
-    minWidth: 980,
-    minHeight: 600,
+    minWidth: 1080,
+    minHeight: 720,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -100,12 +100,24 @@ ipcMain.on('view', (e, name, value) => {
 })
 
 ipcMain.on('export', (e, name) => {
-  const file = dialog.showSaveDialogSync({
-    title: '导出记录为 CSV 文件',
-    defaultPath: `${name || '导出的记录文件'}.csv`,
-    filters: [{ name: 'CSV', extensions: ['csv'] }],
+  const id = dialog.showMessageBoxSync({
+    title: '导出什么',
+    message: '选择导出统计数据还是输入记录',
+    type: 'info',
+    buttons: ['取消', '输入记录', '统计数据'],
   })
-  e.reply('export-reply', file)
+
+  if (id !== 0) {
+    const file = dialog.showSaveDialogSync({
+      title: '导出记录为 CSV 文件',
+      defaultPath: `【${id === 1 ? '输入记录' : '统计数据'}】${
+        name || '导出的记录文件'
+      }.csv`,
+      filters: [{ name: 'CSV', extensions: ['csv'] }],
+    })
+    e.reply('export-reply', id, file)
+  }
+  e.reply('export-reply', 0)
 })
 
 ipcMain.on('confirm', (e, message) => {
