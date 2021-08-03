@@ -11,5 +11,6 @@ export const JSONToCSV = (data: LogType[]): string => {
           'YYYY 年 MM 月 DD 日 HH:mm:ss'
         )},`
     )
+  window.log.debug(`执行 JSON 转换为 CSV`)
   return [...header, ...arr].join('\n')
 }

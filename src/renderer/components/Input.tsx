@@ -27,6 +27,9 @@ const Input = () => {
       if (inputRef.current && context) {
         if (input !== '') {
           setResult('...')
+          window.log.info(
+            `记录 [${context.hash.replace('#', '')}] 获得输入 [${input}]`
+          )
 
           const arr = [
             {

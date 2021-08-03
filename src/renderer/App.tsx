@@ -9,10 +9,12 @@ const App = () => {
     const hash = window.location.hash
     switch (hash) {
       case '': {
+        window.log.debug(`打开主页`)
         setView(<Home />)
         break
       }
       default: {
+        window.log.debug(`打开计数页 [${hash.replace('#', '')}]`)
         setView(<Count />)
         break
       }

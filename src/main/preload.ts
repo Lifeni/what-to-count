@@ -1,5 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import fs from 'fs'
+import log from 'electron-log'
+
+contextBridge.exposeInMainWorld('log', log.functions)
 
 contextBridge.exposeInMainWorld('electron', {
   setView: (name: string, value: string) =>

@@ -1,3 +1,5 @@
+import log from 'electron-log'
+
 type ViewType = 'home' | 'count'
 
 export type LogType = {
@@ -17,5 +19,6 @@ declare global {
       exportRecord: (data: string, name: string) => void
       showConfirm: (message: string, action: () => void) => void
     }
+    log: log.LogFunctions
   }
 }

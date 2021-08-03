@@ -8,6 +8,7 @@ export const createRecord = async () => {
   const unixTime = new Date().getTime().toString()
   await localforage.setItem(unixTime, [])
   window.electron.setView('count', unixTime)
+  window.log.info(`记录 [${unixTime}] 创建记录文件`)
 }
 
 export const getRecords = async (
@@ -15,6 +16,7 @@ export const getRecords = async (
 ) => {
   const keys = await localforage.keys()
   setRecords(keys)
+  window.log.debug(`读取所有记录文件`)
 }
 
 export const exportRecord = async (id: string) => {
@@ -24,6 +26,7 @@ export const exportRecord = async (id: string) => {
       JSONToCSV(data),
       `在 ${dayjs(Number(id)).format('YYYY-MM-DD HH-mm-ss')} 创建的记录`
     )
+    window.log.debug(`记录 [${id}] 导出记录文件`)
   }
 }
 
@@ -34,5 +37,6 @@ export const removeRecord = async (
   window.electron.showConfirm('确认删除这条记录吗？', async () => {
     await localforage.removeItem(id)
     await getRecords(setRecords)
+    window.log.warn(`记录 [${id}] 删除记录文件`)
   })
 }
