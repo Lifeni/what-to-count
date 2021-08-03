@@ -39,7 +39,7 @@ const Count = () => {
   return (
     <>
       <Helmet>
-        <title>计数与统计 {hash}</title>
+        <title>{`计数 - 计数与统计 - ${hash}`}</title>
       </Helmet>
       <InputContext.Provider
         value={{

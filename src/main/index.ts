@@ -1,11 +1,15 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron'
+import Store from 'electron-store'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
+
+Store.initRenderer()
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 let homeWin: BrowserWindow | null = null
 let countWin: BrowserWindow | null = null
+let mappingWin: BrowserWindow | null = null
 
 const createHomeWindow = () => {
   homeWin = new BrowserWindow({
@@ -66,6 +70,34 @@ const createCountWindow = (name: string) => {
   }
 }
 
+const createMappingWindow = () => {
+  mappingWin = new BrowserWindow({
+    width: 720,
+    height: 540,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: join(__dirname, './preload.js'),
+    },
+    show: false,
+    autoHideMenuBar: true,
+    resizable: false,
+  })
+    .once('ready-to-show', () => {
+      mappingWin?.show()
+    })
+    .on('closed', () => {
+      mappingWin = null
+    })
+
+  if (isDevelopment) {
+    mappingWin.loadURL(`http://localhost:3000/#mapping`)
+    mappingWin.webContents.toggleDevTools()
+  } else {
+    mappingWin.loadFile(`./renderer/index.html`, { hash: 'mapping' })
+  }
+}
+
 app.whenReady().then(createHomeWindow)
 
 app.on('window-all-closed', () => {
@@ -86,6 +118,7 @@ ipcMain.on('view', (e, name, value) => {
       if (!homeWin) {
         createHomeWindow()
         countWin && countWin.close()
+        mappingWin && mappingWin.close()
       } else homeWin.focus()
       break
     }
@@ -93,7 +126,16 @@ ipcMain.on('view', (e, name, value) => {
       if (!countWin) {
         createCountWindow(value)
         homeWin && homeWin.close()
+        mappingWin && mappingWin.close()
       } else countWin.focus()
+      break
+    }
+    case 'mapping': {
+      if (!mappingWin) {
+        createMappingWindow()
+        homeWin && homeWin.close()
+        countWin && countWin.close()
+      } else mappingWin.focus()
       break
     }
   }

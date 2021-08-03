@@ -1,4 +1,5 @@
 import { calcStatistics } from '@renderer/utils/calc-statistics'
+import { getMapping } from '@renderer/utils/mapping-handler'
 import { InputContext } from '@renderer/views/Count'
 import React, { useContext, useEffect, useState } from 'react'
 import { StatType } from '../index'
@@ -20,6 +21,7 @@ const Statistics = () => {
           <thead>
             <tr className="border-b divide-x bg-gray-50">
               <th className="px-4 py-3">输入</th>
+              <th className="px-4 py-3">映射</th>
               <th className="px-4 py-3">次数</th>
             </tr>
           </thead>
@@ -31,6 +33,9 @@ const Statistics = () => {
               >
                 <td className="px-4 py-3 text-center font-bold">
                   {stat.input}
+                </td>
+                <td className="px-4 py-3 text-center">
+                  {getMapping(stat.input)}
                 </td>
                 <td className="px-4 py-3 text-center">{stat.count}</td>
               </tr>

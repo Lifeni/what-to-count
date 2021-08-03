@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import Count from './views/Count'
 import Home from './views/Home'
+import Mapping from './views/Mapping'
 
 const App = () => {
   const [view, setView] = useState<ReactElement | null>(null)
@@ -11,6 +12,11 @@ const App = () => {
       case '': {
         window.log.debug(`打开主页`)
         setView(<Home />)
+        break
+      }
+      case '#mapping': {
+        window.log.debug(`打开映射页`)
+        setView(<Mapping />)
         break
       }
       default: {

@@ -38,7 +38,7 @@ const Home = () => {
           </Button>
           <Button
             className="hover:text-white hover:bg-green-600"
-            onClick={() => createRecord()}
+            onClick={() => window.electron.setView('mapping')}
           >
             <FiBookOpen />
             映射

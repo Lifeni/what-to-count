@@ -1,6 +1,7 @@
 import { InputContext } from '@renderer/views/Count'
 import React, { useContext } from 'react'
 import dayjs from 'dayjs'
+import { getMapping } from '@renderer/utils/mapping-handler'
 
 const Logs = () => {
   const context = useContext(InputContext)
@@ -13,6 +14,7 @@ const Logs = () => {
             <tr className="border-b divide-x bg-gray-50">
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">输入</th>
+              <th className="px-4 py-3">映射</th>
               <th className="px-4 py-3">录入时间</th>
             </tr>
           </thead>
@@ -21,6 +23,9 @@ const Logs = () => {
               <tr className="border-b divide-x even:bg-gray-50" key={log.time}>
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
                 <td className="px-4 py-3 text-center font-bold">{log.input}</td>
+                <td className="px-4 py-3 text-center">
+                  {getMapping(log.input)}
+                </td>
                 <td className="px-4 py-3 text-center">
                   {dayjs(Number(log.time)).format(
                     'YYYY 年 MM 月 DD 日 HH:mm:ss'
