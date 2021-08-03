@@ -26,31 +26,24 @@ const Home = () => {
   return (
     <main className="w-100 h-full mx-auto flex flex-col items-center justify-center gap-4">
       <section className="w-full col-span-1 flex gap-4 justify-between items-center">
-        <section className="flex gap-4 items-center">
-          <h1 className="text-xl px-2 flex items-center gap-3">
-            <FiClock />
-            最近的记录
-          </h1>
-        </section>
-        <section className="flex gap-4 items-center">
-          <Button onClick={() => getRecords(setRecords)}>
-            <FiRefreshCw /> 刷新
-          </Button>
-          <Button
-            className="hover:text-white hover:bg-green-600"
-            onClick={() => window.electron.setView('mapping')}
-          >
-            <FiBookOpen />
-            映射
-          </Button>
-          <Button
-            className="hover:text-white hover:bg-blue-600"
-            onClick={() => createRecord()}
-          >
-            <FiPlus />
-            新建记录
-          </Button>
-        </section>
+        <Button
+          className="hover:text-white hover:bg-blue-600"
+          onClick={() => createRecord()}
+        >
+          <FiPlus /> 新建记录
+        </Button>
+        <h1 className="px-4 py-2 text-gray-400 flex gap-3 items-center justify-center flex-1 border rounded-md hover:text-gray-600 transition cursor-default">
+          <FiClock /> 最近的记录（共 {records.length} 条）
+        </h1>
+        <Button
+          className="hover:text-white hover:bg-green-600"
+          onClick={() => window.electron.setView('mapping')}
+        >
+          <FiBookOpen /> 映射
+        </Button>
+        <Button onClick={() => getRecords(setRecords)}>
+          <FiRefreshCw /> 刷新
+        </Button>
       </section>
       <div className="w-full min-h-0 border h-full rounded-md">
         {records.length === 0 ? (

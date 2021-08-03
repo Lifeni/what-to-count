@@ -28,7 +28,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="h-screen w-full font-sans p-6 overflow-hidden">{view}</div>
+    <div className="h-screen w-full font-sans p-4 overflow-hidden">{view}</div>
   )
 }
 

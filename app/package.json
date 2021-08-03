@@ -1,8 +1,17 @@
 {
   "name": "what-to-count",
   "productName": "计数与统计",
-  "version": "0.5.0",
+  "description": "一个用于计数和统计的桌面程序，适用于一般条码扫描仪。",
+  "version": "0.6.0",
   "license": "MIT",
+  "author": {
+    "name": "Lifeni",
+    "email": "liangfengning@foxmail.com"
+  },
+  "homepage": "https://github.com/Lifeni/what-to-count",
+  "repository": {
+    "url": "https://github.com/Lifeni/what-to-count"
+  },
   "main": "index.js",
   "devDependencies": {
     "electron": "^13.1.7"
