@@ -1,27 +1,15 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import log from 'electron-log'
-import Store from 'electron-store'
 import fs from 'fs'
 
 contextBridge.exposeInMainWorld('log', log.functions)
 
-const store = new Store({
-  name: 'mapping-store',
-})
-
 contextBridge.exposeInMainWorld('store', {
-  get: (key: string) => store.get(key),
-  set: (key: string, value: any) => store.set(key, value),
-  all: () => {
-    const arr = []
-    if (store.store) {
-      for (const [input, name] of Object.entries(store.store)) {
-        arr.push({ input, name })
-      }
-    }
-    return arr
-  },
-  del: (key: string) => store.delete(key),
+  get: async (key: string) => await ipcRenderer.invoke('store', 'get', key),
+  set: async (key: string, value: any) =>
+    await ipcRenderer.invoke('store', 'set', key, value),
+  all: async () => await ipcRenderer.invoke('store', 'get-all'),
+  del: async (key: string) => await ipcRenderer.invoke('store', 'del', key),
 })
 
 contextBridge.exposeInMainWorld('electron', {

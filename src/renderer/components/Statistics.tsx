@@ -1,12 +1,13 @@
 import { calcStatistics } from '@renderer/utils/calc-statistics'
-import { getMapping } from '@renderer/utils/mapping-handler'
+import { allMapping } from '@renderer/utils/mapping-handler'
 import { InputContext } from '@renderer/views/Count'
 import React, { useContext, useEffect, useState } from 'react'
-import { StatType } from '../index'
+import { MappingType, StatType } from '../index'
 
 const Statistics = () => {
   const context = useContext(InputContext)
   const [stats, setStats] = useState<StatType[]>([])
+  const [mapping, setMapping] = useState<MappingType[]>([])
 
   useEffect(() => {
     if (context) {
@@ -14,9 +15,16 @@ const Statistics = () => {
     }
   }, [context])
 
+  useEffect(() => {
+    const init = async () => {
+      setMapping(await allMapping())
+    }
+    init()
+  }, [])
+
   return (
     <div className="w-full h-full min-h-0 rounded-md overflow-y-auto border">
-      {context && context.logs.length !== 0 ? (
+      {stats && context && context.logs.length !== 0 ? (
         <table className="w-full border-none">
           <thead>
             <tr className="border-b divide-x bg-gray-50">
@@ -35,7 +43,7 @@ const Statistics = () => {
                   {stat.input}
                 </td>
                 <td className="px-4 py-3 text-center">
-                  {getMapping(stat.input)}
+                  {mapping.find(a => a.input === stat.input)?.name || ''}
                 </td>
                 <td className="px-4 py-3 text-center">{stat.count}</td>
               </tr>

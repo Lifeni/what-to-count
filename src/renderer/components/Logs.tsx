@@ -1,10 +1,19 @@
+import { allMapping } from '@renderer/utils/mapping-handler'
 import { InputContext } from '@renderer/views/Count'
-import React, { useContext } from 'react'
 import dayjs from 'dayjs'
-import { getMapping } from '@renderer/utils/mapping-handler'
+import React, { useContext, useEffect, useState } from 'react'
+import { MappingType } from '..'
 
 const Logs = () => {
   const context = useContext(InputContext)
+  const [mapping, setMapping] = useState<MappingType[]>([])
+
+  useEffect(() => {
+    const init = async () => {
+      setMapping(await allMapping())
+    }
+    init()
+  }, [])
 
   return (
     <div className="w-full h-full min-h-0 rounded-md overflow-y-auto border">
@@ -24,7 +33,7 @@ const Logs = () => {
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
                 <td className="px-4 py-3 text-center font-bold">{log.input}</td>
                 <td className="px-4 py-3 text-center">
-                  {getMapping(log.input)}
+                  {mapping.find(a => a.input === log.input)?.name || ''}
                 </td>
                 <td className="px-4 py-3 text-center">
                   {dayjs(Number(log.time)).format(

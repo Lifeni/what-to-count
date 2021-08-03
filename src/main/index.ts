@@ -1,9 +1,7 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron'
-import Store from 'electron-store'
 import { join } from 'path'
 import { pathToFileURL } from 'url'
-
-Store.initRenderer()
+import './store'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 

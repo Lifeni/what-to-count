@@ -24,8 +24,8 @@ export const exportRecord = async (id: string) => {
   const data = await localforage.getItem<LogType[]>(id)
   if (data) {
     window.electron.exportRecord(
-      logsToCSV(data),
-      statsToCSV(calcStatistics(data, 'id')),
+      await logsToCSV(data),
+      await statsToCSV(calcStatistics(data, 'id')),
       `在 ${dayjs(Number(id)).format('YYYY-MM-DD HH-mm-ss')} 创建的记录`
     )
     window.log.debug(`记录 [${id}] 导出记录文件`)

@@ -2,18 +2,11 @@ import Button from '@renderer/components/Button'
 import {
   addMapping,
   allMapping,
-  getMapping,
   removeMapping,
 } from '@renderer/utils/mapping-handler'
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import {
-  FiArrowLeft,
-  FiClock,
-  FiPlus,
-  FiRefreshCw,
-  FiTrash2,
-} from 'react-icons/fi'
+import { FiArrowLeft, FiPlus, FiRefreshCw, FiTrash2 } from 'react-icons/fi'
 import { MappingType } from '../index'
 
 const Mapping = () => {
@@ -100,23 +93,27 @@ const Mapping = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {mapping.reverse().map((record, index) => (
-                    <tr
-                      key={record.input}
-                      className="px-6 py-4 border-b divide-x even:bg-gray-50"
-                    >
-                      <td className="px-4 py-3 text-center">{record.input}</td>
-                      <td className="px-4 py-3 text-center">{record.name}</td>
-                      <td className="grid grid-cols-1 divide-x w-32">
-                        <button
-                          onClick={() => handleRemoveMapping(record.input)}
-                          className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100"
-                        >
-                          <FiTrash2 /> 删除
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {mapping
+                    .sort((a, b) => Number(a.input) - Number(b.input))
+                    .map(record => (
+                      <tr
+                        key={record.input}
+                        className="px-6 py-4 border-b divide-x even:bg-gray-50"
+                      >
+                        <td className="px-4 py-3 text-center">
+                          {record.input}
+                        </td>
+                        <td className="px-4 py-3 text-center">{record.name}</td>
+                        <td className="grid grid-cols-1 divide-x w-32">
+                          <button
+                            onClick={() => handleRemoveMapping(record.input)}
+                            className="flex gap-3 items-center justify-center px-4 py-3 cursor-pointer text-red-600 hover:bg-gray-100"
+                          >
+                            <FiTrash2 /> 删除
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

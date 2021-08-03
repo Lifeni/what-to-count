@@ -1,5 +1,4 @@
 import log from 'electron-log'
-import Store from 'electron-store'
 
 type ViewType = 'home' | 'count' | 'mapping'
 
@@ -27,10 +26,10 @@ declare global {
     }
     log: log.LogFunctions
     store: {
-      get: (key: string) => MappingType
-      set: (key: string, value: any) => void
-      all: () => MappingType[]
-      del: (key: string) => void
+      get: (key: string) => Promise<string>
+      set: (key: string, value: any) => Promise<void>
+      all: () => Promise<MappingType[]>
+      del: (key: string) => Promise<void>
     }
   }
 }
