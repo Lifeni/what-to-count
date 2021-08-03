@@ -6,23 +6,23 @@ export const calcStatistics = (logs: LogType[], sort: SortBy = 'count') => {
   const map = new Map<string, number>()
   if (logs) {
     logs.map(log => {
-      const count = map.get(log.name)
+      const count = map.get(log.input)
       if (count !== undefined) {
-        map.set(log.name, count + 1)
+        map.set(log.input, count + 1)
       } else {
-        map.set(log.name, 1)
+        map.set(log.input, 1)
       }
     })
   }
 
   if (sort === 'id') {
     return Array.from(map.entries(), ([key, value]) => ({
-      name: key,
+      input: key,
       count: value,
-    })).sort((a, b) => Number(a.name) - Number(b.name))
+    })).sort((a, b) => Number(a.input) - Number(b.input))
   }
   return Array.from(map.entries(), ([key, value]) => ({
-    name: key,
+    input: key,
     count: value,
   })).sort((a, b) => b.count - a.count)
 }

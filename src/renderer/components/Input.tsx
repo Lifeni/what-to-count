@@ -34,7 +34,7 @@ const Input = () => {
           const arr = [
             {
               time: new Date().getTime().toString(),
-              name: input,
+              input: input,
             },
             ...context.logs,
           ]

@@ -23,6 +23,6 @@ export const revertLog = async (
     const arr = logs.slice(1)
     await localforage.setItem(id, arr)
     setLogs(arr)
-    window.log.warn(`记录 [${id}] 撤销一次记录 [${log.name}]`)
+    window.log.warn(`记录 [${id}] 撤销一次记录 [${log.input}]`)
   })
 }

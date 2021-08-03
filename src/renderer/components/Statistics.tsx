@@ -25,8 +25,13 @@ const Statistics = () => {
           </thead>
           <tbody>
             {stats.map(stat => (
-              <tr className="border-b divide-x even:bg-gray-50" key={stat.name}>
-                <td className="px-4 py-3 text-center font-bold">{stat.name}</td>
+              <tr
+                className="border-b divide-x even:bg-gray-50"
+                key={stat.input}
+              >
+                <td className="px-4 py-3 text-center font-bold">
+                  {stat.input}
+                </td>
                 <td className="px-4 py-3 text-center">{stat.count}</td>
               </tr>
             ))}

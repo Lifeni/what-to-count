@@ -20,7 +20,7 @@ const Logs = () => {
             {context.logs.map((log, index, logs) => (
               <tr className="border-b divide-x even:bg-gray-50" key={log.time}>
                 <td className="px-4 py-3 text-center">{logs.length - index}</td>
-                <td className="px-4 py-3 text-center font-bold">{log.name}</td>
+                <td className="px-4 py-3 text-center font-bold">{log.input}</td>
                 <td className="px-4 py-3 text-center">
                   {dayjs(Number(log.time)).format(
                     'YYYY 年 MM 月 DD 日 HH:mm:ss'

@@ -4,11 +4,11 @@ type ViewType = 'home' | 'count'
 
 export type LogType = {
   time: string
-  name: string
+  input: string
 }
 
 export type StatType = {
-  name: string
+  input: string
   count: number
 }
 
