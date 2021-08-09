@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/Lifeni/what-to-count)
 
-一个用于计数和统计的桌面程序，适用于一般条码扫描仪。
+一个用于计数和统计的桌面程序。
 
 通过条码扫描仪或键盘读入数据后，根据配置文件对数据进行统计和整合。
 
