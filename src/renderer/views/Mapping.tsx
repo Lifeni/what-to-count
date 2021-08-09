@@ -53,7 +53,7 @@ const Mapping = () => {
           </Button>
           <input
             ref={inputRef}
-            type="text"
+            type="number"
             placeholder="输入（编号）"
             className="w-full border rounded-md px-4 py-2 outline-none transition focus:ring-4"
             onChange={e => setInput(e.target.value)}

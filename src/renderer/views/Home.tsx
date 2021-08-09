@@ -1,4 +1,5 @@
 import Button from '@renderer/components/Button'
+import Filter from '@renderer/components/Filter'
 import {
   createRecord,
   exportRecord,
@@ -102,6 +103,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      <Filter />
     </main>
   )
 }
