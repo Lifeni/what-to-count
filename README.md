@@ -6,9 +6,11 @@
 
 通过条码扫描仪或键盘读入数据后，根据配置文件对数据进行统计和整合。
 
-> 软件仅在 Windows 平台上测试，不保证其他平台可用性。
+> 软件仅在 Windows 上测试，理论上 Linux 和 macOS 也能用。
 
-## 开发
+## 开发构建
+
+程序编译需要 Node.js 16 及以上版本和 Yarn 包管理器。
 
 ```shell
 # 安装依赖
@@ -25,6 +27,10 @@ yarn run pack:win
 # 打包为 Windows、Linux 和 macOS 的程序
 yarn run pack:all
 ```
+
+打包后的文件在项目根目录的 dist 文件夹下。
+
+> 第一次运行打包程序需要从 GitHub 上下载一些文件，可能需要一些时间。
 
 ## 协议相关
 
